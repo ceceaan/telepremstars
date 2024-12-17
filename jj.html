@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Scan QR</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fce4ec;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .container {
+      text-align: center;
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      color: #ad1457;
+      margin-bottom: 20px;
+    }
+
+    .qr-image {
+      margin-bottom: 20px;
+    }
+
+    .qr-image img {
+      width: 200px;
+      height: 200px;
+    }
+
+    .next-button {
+      background-color: #f48fb1;
+      color: #ffffff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .next-button:hover {
+      background-color: #c2185b;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Scan QR</h1>
+    <div class="qr-image">
+      <img src="po.jpg" alt="QR Code">
+    </div>
+   <a href="fff.html" <button class="next-button" onclick="goToNextPage()">Next</button>
+  </div>
+
+  <script>
+    function goToNextPage() {
+      // Replace 'next-page.html' with the actual URL of the next page
+      window.location.href = 'next-page.html';
+    }
+  </script>
+</body>
+
+</html>

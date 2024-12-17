@@ -1,452 +1,439 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Product List</title>
+    <title>Checkout</title>
     <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
       rel="stylesheet"
     />
-    <!-- Font Awesome CDN -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-    />
-
     <style>
-      /* General Styles */
       body {
         font-family: "Poppins", sans-serif;
-        background-color: #f9f9f9;
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
+        background-color: #e7eff6; /* Biru pastel yang lebih soft */
+        color: #2c3e50;
+        padding: 20px;
       }
-
-      .container {
-        max-width: 1200px;
+      .checkout-container {
+        max-width: 900px;
         margin: 0 auto;
-        padding: 15px;
+        background-color: #ffffff;
+        border-radius: 12px;
+        padding: 30px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
       }
-
-      .title-box {
-        text-align: center;
-        margin-bottom: 30px;
-      }
-
-      h2 {
-        font-size: 2rem;
-        color: #454b63;
+      .checkout-header {
+        font-size: 30px;
         font-weight: 600;
-      }
-
-      /* Product Styles */
-      .product-top {
-        position: relative;
+        margin-bottom: 40px;
         text-align: center;
+        color: #3498db; /* Biru yang lebih kalem */
+      }
+      .item-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 20px;
         margin-bottom: 20px;
       }
-
-      .product-top i {
-        font-size: 40px;
-        color: #ffd700;
+      .item {
+        background-color: #f8f9fa;
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
+        text-align: center;
       }
-
-      .product-bottom {
-        padding: 10px;
-        background-color: white;
-        border-radius: 8px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      .item:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
       }
-
-      .product-bottom h3 {
-        font-size: 1.2rem;
-        color: #454b63;
-        margin: 10px 0;
+      .item-name {
+        font-size: 18px;
+        font-weight: 500;
+        margin-bottom: 15px;
       }
-
-      .product-price {
-        font-size: 1.5rem;
-        color: #454b63;
+      .item-price {
+        font-size: 16px;
         font-weight: 600;
+        color: #2980b9;
+        margin-bottom: 15px;
       }
-
-      input[type="number"],
-      input[type="submit"] {
-        width: 100%;
-        padding: 10px;
-        margin-top: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        font-size: 1rem;
+      .item-price img {
+        vertical-align: middle;
+        margin-left: 5px;
       }
-
-      input[type="submit"] {
-        background-color: #454b63;
+      .add-to-cart {
+        background-color: #3498db;
         color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
         cursor: pointer;
-        transition: background-color 0.3s;
+        font-weight: 600;
+        transition: background-color 0.3s ease;
       }
-
-      input[type="submit"]:hover {
-        background-color: #3c4253;
+      .add-to-cart:hover {
+        background-color: #2980b9;
       }
-
-      /* Responsive Styles */
-      @media (max-width: 767px) {
-        .product-bottom h3 {
-          font-size: 1rem;
-        }
-
-        .product-price {
-          font-size: 1.2rem;
-        }
-      }
-
-      /* Grid Layout for Products */
-      .row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 15px;
-        justify-content: space-between;
-      }
-
-      .col-md-3 {
+      .button {
+        display: block;
         width: 100%;
+        padding: 15px;
+        background-color: #3498db;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 18px;
+        cursor: pointer;
+        margin-top: 20px;
       }
-      .big-star {
-  font-size: 60px; /* Ukuran besar bintang */
-  color: #FFD700; /* Warna kuning emas */
-  margin-bottom: 10px; /* Jarak bawah untuk memberi ruang di bawah bintang */
-}
-
-.star-rating {
-  display: flex; /* Menampilkan bintang secara horizontal */
-  justify-content: center; /* Memposisikan bintang di tengah */
-  align-items: center; /* Menjaga agar bintang sejajar secara vertikal */
-}
-
+      .button:hover {
+        background-color: #2980b9;
+      }
     </style>
   </head>
-
   <body>
-    <section class="new-arrivals">
-      <div class="container">
-        <div class="title-box">
-          <h2>PRICELIST</h2>
+    <div class="checkout-container">
+      <div class="checkout-header">Checkout</div>
+
+      <div class="item-list">
+        <!-- Barang yang dapat dipilih -->
+        <div class="item">
+          <div class="item-name">50 Stars ⭐</div>
+          <div class="item-price">14.000</div>
+          <button
+            class="add-to-cart"
+            data-name="50 Stars ⭐"
+            data-price="14000"
+          >
+            Tambah ke Keranjang
+          </button>
         </div>
-        <div class="row">
-          <!-- 50 Stars -->
-          <div class="col-md-3 product-container">
-            <div class="product-top">
-              <div class="overlay-right">
-                <button
-                  type="button"
-                  class="btn btn-secondary"
-                  title="Quick Shop"
-                ></button>
-              </div>
-            </div>
-            <div class="product-bottom text-center">
-              <i class="fa fa-star big-star"></i>
-              <h3>50 Stars</h3>
-              <p class="product-price">Rp14.000</p>
-              <form class="add-to-cart" onsubmit="addToCart(event)">
-                <div>
-                  <label for="qty-50">Quantity</label>
-                  <input
-                    type="number"
-                    name="qty-50"
-                    id="qty-50"
-                    class="qty"
-                    value="1"
-                    min="1"
-                  />
-                </div>
-                <input type="submit" value="Add to Cart" />
-              </form>
-            </div>
-          </div>
-
-          <!-- 100 Stars -->
-          <div class="col-md-3 product-container">
-            <div class="product-top">
-              <div class="overlay-right">
-                <button
-                  type="button"
-                  class="btn btn-secondary"
-                  title="Quick Shop"
-                ></button>
-              </div>
-            </div>
-            <div class="product-bottom text-center">
-              <i class="fa fa-star big-star"></i>
-              <h3>100 Stars</h3>
-              <p class="product-price">Rp28.000</p>
-              <form class="add-to-cart" onsubmit="addToCart(event)">
-                <div>
-                  <label for="qty-100">Quantity</label>
-                  <input
-                    type="number"
-                    name="qty-100"
-                    id="qty-100"
-                    class="qty"
-                    value="1"
-                    min="1"
-                  />
-                </div>
-                <input type="submit" value="Add to Cart" />
-              </form>
-            </div>
-          </div>
-
-          <!-- 200 Stars -->
-          <div class="col-md-3 product-container">
-            <div class="product-top">
-              <div class="overlay-right">
-                <button
-                  type="button"
-                  class="btn btn-secondary"
-                  title="Quick Shop"
-                ></button>
-              </div>
-            </div>
-            <div class="product-bottom text-center">
-              <i class="fa fa-star big-star"></i>
-              <h3>200 Stars</h3>
-              <p class="product-price">Rp54.000</p>
-              <form class="add-to-cart" onsubmit="addToCart(event)">
-                <div>
-                  <label for="qty-200">Quantity</label>
-                  <input
-                    type="number"
-                    name="qty-200"
-                    id="qty-200"
-                    class="qty"
-                    value="1"
-                    min="1"
-                  />
-                </div>
-                <input type="submit" value="Add to Cart" />
-              </form>
-            </div>
-          </div>
-
-          <!-- 500 Stars -->
-          <div class="col-md-3 product-container">
-            <div class="product-top">
-              <div class="overlay-right">
-                <button
-                  type="button"
-                  class="btn btn-secondary"
-                  title="Quick Shop"
-                ></button>
-              </div>
-            </div>
-            <div class="product-bottom text-center">
-              <i class="fa fa-star big-star"></i>
-              <h3>500 Stars</h3>
-              <p class="product-price">Rp130.000</p>
-              <form class="add-to-cart" onsubmit="addToCart(event)">
-                <div>
-                  <label for="qty-500">Quantity</label>
-                  <input
-                    type="number"
-                    name="qty-500"
-                    id="qty-500"
-                    class="qty"
-                    value="1"
-                    min="1"
-                  />
-                </div>
-                <input type="submit" value="Add to Cart" />
-              </form>
-            </div>
-          </div>
-
-          <!-- 1,000 Stars -->
-          <div class="col-md-3 product-container">
-            <div class="product-top">
-              <div class="overlay-right">
-                <button
-                  type="button"
-                  class="btn btn-secondary"
-                  title="Quick Shop"
-                ></button>
-              </div>
-            </div>
-            <div class="product-bottom text-center">
-              <i class="fa fa-star big-star"></i>
-              <h3>1.000 Stars</h3>
-              <p class="product-price">Rp257.000</p>
-              <form class="add-to-cart" onsubmit="addToCart(event)">
-                <div>
-                  <label for="qty-1000">Quantity</label>
-                  <input
-                    type="number"
-                    name="qty-1000"
-                    id="qty-1000"
-                    class="qty"
-                    value="1"
-                    min="1"
-                  />
-                </div>
-                <input type="submit" value="Add to Cart" />
-              </form>
-            </div>
-          </div>
-
-          <!-- 2,000 Stars -->
-          <div class="col-md-3 product-container">
-            <div class="product-top">
-              <div class="overlay-right">
-                <button
-                  type="button"
-                  class="btn btn-secondary"
-                  title="Quick Shop"
-                ></button>
-              </div>
-            </div>
-            <div class="product-bottom text-center">
-              <i class="fa fa-star big-star"></i>
-              <h3>2.000 Stars</h3>
-              <p class="product-price">Rp500.000</p>
-              <form class="add-to-cart" onsubmit="addToCart(event)">
-                <div>
-                  <label for="qty-2000">Quantity</label>
-                  <input
-                    type="number"
-                    name="qty-2000"
-                    id="qty-2000"
-                    class="qty"
-                    value="1"
-                    min="1"
-                  />
-                </div>
-                <input type="submit" value="Add to Cart" />
-              </form>
-            </div>
-          </div>
-
-          <!-- 5,000 Stars -->
-          <div class="col-md-3 product-container">
-            <div class="product-top">
-              <div class="overlay-right">
-                <button
-                  type="button"
-                  class="btn btn-secondary"
-                  title="Quick Shop"
-                ></button>
-              </div>
-            </div>
-            <div class="product-bottom text-center">
-              <i class="fa fa-star big-star"></i>
-              <h3>5.000 Stars</h3>
-              <p class="product-price">Rp1.235.000</p>
-              <form class="add-to-cart" onsubmit="addToCart(event)">
-                <div>
-                  <label for="qty-5000">Quantity</label>
-                  <input
-                    type="number"
-                    name="qty-5000"
-                    id="qty-5000"
-                    class="qty"
-                    value="1"
-                    min="1"
-                  />
-                </div>
-                <input type="submit" value="Add to Cart" />
-              </form>
-            </div>
-          </div>
-
-          <!-- 10,000 Stars -->
-          <div class="col-md-3 product-container">
-            <div class="product-top">
-              <div class="overlay-right">
-                <button
-                  type="button"
-                  class="btn btn-secondary"
-                  title="Quick Shop"
-                ></button>
-              </div>
-            </div>
-            <div class="product-bottom text-center">
-              <i class="fa fa-star big-star"></i>
-              <h3>10.000 Stars</h3>
-              <p class="product-price">Rp2.465.000</p>
-              <form class="add-to-cart" onsubmit="addToCart(event)">
-                <div>
-                  <label for="qty-10000">Quantity</label>
-                  <input
-                    type="number"
-                    name="qty-10000"
-                    id="qty-10000"
-                    class="qty"
-                    value="1"
-                    min="1"
-                  />
-                </div>
-                <input type="submit" value="Add to Cart" />
-              </form>
-            </div>
-          </div>
-
-          <div class="col-md-3 product-container">
-            <div class="product-top">
-              <div class="overlay-right">
-                <button
-                  type="button"
-                  class="btn btn-secondary"
-                  title="Quick Shop"
-                ></button>
-              </div>
-            </div>
-            
-           
-            </div>
-          </div>
+        <div class="item">
+          <div class="item-name">75 Stars ⭐</div>
+          <div class="item-price">23.500</div>
+          <button
+            class="add-to-cart"
+            data-name="75 Stars ⭐"
+            data-price="23500"
+          >
+            Tambah ke Keranjang
+          </button>
+        </div>
+        <div class="item">
+          <div class="item-name">100 Stars ⭐</div>
+          <div class="item-price">28.000</div>
+          <button
+            class="add-to-cart"
+            data-name="100 Stars ⭐"
+            data-price="28000"
+          >
+            Tambah ke Keranjang
+          </button>
+        </div>
+        <div class="item">
+          <div class="item-name">125 Stars ⭐</div>
+          <div class="item-price">34.000</div>
+          <button
+            class="add-to-cart"
+            data-name="125 Stars ⭐"
+            data-price="34000"
+          >
+            Tambah ke Keranjang
+          </button>
+        </div>
+        <div class="item">
+          <div class="item-name">150 Stars ⭐</div>
+          <div class="item-price">41.000</div>
+          <button
+            class="add-to-cart"
+            data-name="150 Stars ⭐"
+            data-price="41000"
+          >
+            Tambah ke Keranjang
+          </button>
+        </div>
+        <div class="item">
+          <div class="item-name">175 Stars ⭐</div>
+          <div class="item-price">47.000</div>
+          <button
+            class="add-to-cart"
+            data-name="175 Stars ⭐"
+            data-price="47000"
+          >
+            Tambah ke Keranjang
+          </button>
+        </div>
+        <div class="item">
+          <div class="item-name">200 Stars ⭐</div>
+          <div class="item-price">54.000</div>
+          <button
+            class="add-to-cart"
+            data-name="200 Stars ⭐"
+            data-price="54000"
+          >
+            Tambah ke Keranjang
+          </button>
+        </div>
+        <div class="item">
+          <div class="item-name">250 Stars ⭐</div>
+          <div class="item-price">67.000</div>
+          <button
+            class="add-to-cart"
+            data-name="250 Stars ⭐"
+            data-price="67000"
+          >
+            Tambah ke Keranjang
+          </button>
+        </div>
+        <div class="item">
+          <div class="item-name">300 Stars ⭐</div>
+          <div class="item-price">79.000</div>
+          <button
+            class="add-to-cart"
+            data-name="300 Stars ⭐"
+            data-price="79000"
+          >
+            Tambah ke Keranjang
+          </button>
+        </div>
+        <div class="item">
+          <div class="item-name">350 Stars ⭐</div>
+          <div class="item-price">93.000</div>
+          <button
+            class="add-to-cart"
+            data-name="350 Stars ⭐"
+            data-price="93000"
+          >
+            Tambah ke Keranjang
+          </button>
+        </div>
+        <div class="item">
+          <div class="item-name">400 Stars ⭐</div>
+          <div class="item-price">106.000</div>
+          <button
+            class="add-to-cart"
+            data-name="400 Stars ⭐"
+            data-price="106000"
+          >
+            Tambah ke Keranjang
+          </button>
+        </div>
+        <div class="item">
+          <div class="item-name">450 Stars ⭐</div>
+          <div class="item-price">119.000</div>
+          <button
+            class="add-to-cart"
+            data-name="450 Stars ⭐"
+            data-price="119000"
+          >
+            Tambah ke Keranjang
+          </button>
+        </div>
+        <div class="item">
+          <div class="item-name">500 Stars ⭐</div>
+          <div class="item-price">130.000</div>
+          <button
+            class="add-to-cart"
+            data-name="500 Stars ⭐"
+            data-price="130000"
+          >
+            Tambah ke Keranjang
+          </button>
+        </div>
+        <div class="item">
+          <div class="item-name">550 Stars ⭐</div>
+          <div class="item-price">142.000</div>
+          <button
+            class="add-to-cart"
+            data-name="550 Stars ⭐"
+            data-price="142000"
+          >
+            Tambah ke Keranjang
+          </button>
+        </div>
+        <div class="item">
+          <div class="item-name">600 Stars ⭐</div>
+          <div class="item-price">153.000</div>
+          <button
+            class="add-to-cart"
+            data-name="600 Stars ⭐"
+            data-price="153000"
+          >
+            Tambah ke Keranjang
+          </button>
         </div>
       </div>
-    </section>
+      <div class="item">
+        <div class="item-name">650 Stars ⭐</div>
+        <div class="item-price">165.000</div>
+        <button
+          class="add-to-cart"
+          data-name="650 Stars ⭐"
+          data-price="165000"
+        >
+          Tambah ke Keranjang
+        </button>
+      </div>
+      <div class="item">
+        <div class="item-name">700 Stars ⭐</div>
+        <div class="item-price">179.000</div>
+        <button
+          class="add-to-cart"
+          data-name="700 Stars ⭐"
+          data-price="179000"
+        >
+          Tambah ke Keranjang
+        </button>
+      </div>
+      <div class="item">
+        <div class="item-name">750 Stars ⭐</div>
+        <div class="item-price">190.000</div>
+        <button
+          class="add-to-cart"
+          data-name="750 Stars ⭐"
+          data-price="190000"
+        >
+          Tambah ke Keranjang
+        </button>
+      </div>
+      <div class="item">
+        <div class="item-name">1.000 Stars ⭐</div>
+        <div class="item-price">257.000</div>
+        <button
+          class="add-to-cart"
+          data-name="1.000 Stars ⭐"
+          data-price="257000"
+        >
+          Tambah ke Keranjang
+        </button>
+      </div>
+      <div class="item">
+        <div class="item-name">1.500 Stars ⭐</div>
+        <div class="item-price">380.000</div>
+        <button
+          class="add-to-cart"
+          data-name="1.500 Stars ⭐"
+          data-price="380000"
+        >
+          Tambah ke Keranjang
+        </button>
+      </div>
+      <div class="item">
+        <div class="item-name">2.000 Stars ⭐</div>
+        <div class="item-price">500.000</div>
+        <button
+          class="add-to-cart"
+          data-name="2.000 Stars ⭐"
+          data-price="500000"
+        >
+          Tambah ke Keranjang
+        </button>
+      </div>
+      <div class="item">
+        <div class="item-name">2.500 Stars ⭐</div>
+        <div class="item-price">625.000</div>
+        <button
+          class="add-to-cart"
+          data-name="2.500 Stars ⭐"
+          data-price="625000"
+        >
+          Tambah ke Keranjang
+        </button>
+      </div>
+      <div class="item">
+        <div class="item-name">3.000 Stars ⭐</div>
+        <div class="item-price">750.000</div>
+        <button
+          class="add-to-cart"
+          data-name="3.000 Stars ⭐"
+          data-price="750000"
+        >
+          Tambah ke Keranjang
+        </button>
+      </div>
+      <div class="item">
+        <div class="item-name">3.500 Stars ⭐</div>
+        <div class="item-price">865.000</div>
+        <button
+          class="add-to-cart"
+          data-name="3.500 Stars ⭐"
+          data-price="865000"
+        >
+          Tambah ke Keranjang
+        </button>
+      </div>
+      <div class="item">
+        <div class="item-name">4.000 Stars ⭐</div>
+        <div class="item-price">995.000</div>
+        <button
+          class="add-to-cart"
+          data-name="4.000 Stars ⭐"
+          data-price="995000"
+        >
+          Tambah ke Keranjang
+        </button>
+      </div>
+      <div class="item">
+        <div class="item-name">4.500 Stars ⭐</div>
+        <div class="item-price">1.115.000</div>
+        <button
+          class="add-to-cart"
+          data-name="4.500 Stars ⭐"
+          data-price="1115000"
+        >
+          Tambah ke Keranjang
+        </button>
+      </div>
+      <div class="item">
+        <div class="item-name">5.000 Stars ⭐</div>
+        <div class="item-price">1.235.000</div>
+        <button
+          class="add-to-cart"
+          data-name="5.000 Stars ⭐"
+          data-price="1235000"
+        >
+          Tambah ke Keranjang
+        </button>
+      </div>
+      <div class="item">
+        <div class="item-name">10.000 Stars ⭐</div>
+        <div class="item-price">2.465.000</div>
+        <button
+          class="add-to-cart"
+          data-name="10.000 Stars ⭐"
+          data-price="2465000"
+        >
+          Tambah ke Keranjang
+        </button>
+      </div>
 
+      <form action="tt.html">
+    <button type="submit" class="button">Checkout</button>
+</form>
+
+<
     <script>
-      function addToCart(event) {
-        event.preventDefault();
+      // Ambil data keranjang dari localStorage, atau buat array kosong jika belum ada
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-        // Find product details
-        const productContainer = event.target.closest(".product-container");
-        const productName = productContainer.dataset.name;
-        const productPrice = parseFloat(productContainer.dataset.price);
-        const quantity = parseInt(
-          productContainer.querySelector('input[type="number"]').value
-        );
+// Tambahkan event listener ke tombol "add-to-cart"
+document.querySelectorAll(".add-to-cart").forEach((button) => {
+  button.addEventListener("click", function () {
+    let name = this.getAttribute("data-name"); // Ambil nama produk
+    let price = parseInt(this.getAttribute("data-price")); // Ambil harga dan konversi ke integer
 
-        // Retrieve cart from localStorage or initialize
-        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    // Tambahkan item ke keranjang
+    cart.push({ name: name, price: price });
 
-        // Check if product is already in cart
-        const productIndex = cart.findIndex(
-          (item) => item.name === productName
-        );
+    // Simpan kembali ke localStorage
+    localStorage.setItem("cart", JSON.stringify(cart));
 
-        if (productIndex > -1) {
-          cart[productIndex].qty += quantity;
-        } else {
-          cart.push({
-            name: productName,
-            price: productPrice,
-            qty: quantity,
-          });
-        }
+    alert(name + " telah ditambahkan ke keranjang. Scroll ke bawah untuk checkout.");
+  });
+});
 
-        // Save back to localStorage
-        localStorage.setItem("cart", JSON.stringify(cart));
-
-        window.location.href = "tt.html"; // Redirect to cart page
-      }
-    </script>
+    </script>>
   </body>
 </html>

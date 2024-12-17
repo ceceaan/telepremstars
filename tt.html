@@ -1,270 +1,138 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Your Shopping Cart</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout Summary</title>
     <style>
-      /* General Reset */
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      body {
-        font-family: Arial, sans-serif;
-        background-color: #f7f7f7;
-        color: #333;
-        line-height: 1.6;
-      }
-
-      #site {
-        width: 90%;
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 20px;
-      }
-
-      header#masthead {
-        text-align: center;
-        padding: 10px 0;
-      }
-
-      header#masthead h1 {
-        font-size: 36px;
-        color: #454b63;
-        text-transform: uppercase;
-      }
-
-      #content {
-        background-color: #fff;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      }
-
-      #content h1 {
-        font-size: 28px;
-        margin-bottom: 20px;
-      }
-
-      /* Responsive Table */
-      .table-wrapper {
-        overflow-x: auto;
-        margin-bottom: 20px;
-      }
-
-      .shopping-cart {
-        width: 100%;
-        border-collapse: collapse;
-        min-width: 600px; /* For larger tables */
-      }
-
-      .shopping-cart th,
-      .shopping-cart td {
-        padding: 10px;
-        text-align: left;
-      }
-
-      .shopping-cart th {
-        background-color: #454b63;
-        color: white;
-      }
-
-      .shopping-cart td {
-        background-color: #f4f4f4;
-      }
-
-      .shopping-cart tr:nth-child(even) td {
-        background-color: #e9e9e9;
-      }
-
-      #sub-total {
-        font-size: 18px;
-        font-weight: bold;
-        margin-bottom: 20px;
-      }
-
-      #shopping-cart-actions {
-        list-style-type: none;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        padding: 0;
-      }
-
-      #shopping-cart-actions li {
-        flex: 1 1 100%;
-        display: flex;
-        justify-content: center;
-      }
-
-      .btn {
-        background-color: #454b63;
-        color: white;
-        padding: 10px 20px;
-        text-decoration: none;
-        border-radius: 5px;
-        text-align: center;
-        font-size: 16px;
-        transition: background-color 0.3s ease;
-        width: 100%;
-      }
-
-      .btn:hover {
-        background-color: #333;
-      }
-
-      #empty-cart {
-        background-color: rgb(210, 127, 127);
-      }
-
-      #empty-cart:hover {
-        background-color: darkred;
-      }
-
-      footer#site-info {
-        text-align: center;
-        margin-top: 30px;
-        font-size: 14px;
-        color: #aaa;
-      }
-
-      footer#site-info a {
-        color: #454b63;
-        text-decoration: none;
-      }
-
-      footer#site-info a:hover {
-        text-decoration: underline;
-      }
-
-      /* Mobile View */
-      @media (max-width: 768px) {
-        header#masthead h1 {
-          font-size: 28px;
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #D7E3FC; /* Warna biru pastel */
+            color: #333;
         }
 
-        #content {
-          padding: 10px;
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        #shopping-cart-actions li {
-          flex: 1 1 45%;
+        h1 {
+            text-align: center;
+            color: #454b63;
+            margin-bottom: 20px;
         }
 
-        .btn {
-          font-size: 14px;
-          padding: 8px;
-        }
-      }
-
-      @media (max-width: 480px) {
-        header#masthead h1 {
-          font-size: 24px;
+        .item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
         }
 
-        #shopping-cart-actions li {
-          flex: 1 1 100%;
+        .item:last-child {
+            border-bottom: none;
         }
 
-        .btn {
-          width: 100%;
+        .total {
+            text-align: right;
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 20px;
         }
-      }
+
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        button {
+            background-color: #86aadb; /* Warna biru pastel lebih gelap */
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #99bbdc;
+        }
+
+        .remove-btn {
+            background-color: #ff9799;
+        }
+
+        .remove-btn:hover {
+            background-color: #d9363e;
+        }
     </style>
-    <script
-      type="text/javascript"
-      src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"
-    ></script>
-  </head>
-
-  <body>
-    <div id="site">
-      <header id="masthead">
-        <h1>Your Shopping Cart</h1>
-      </header>
-      <div id="content">
-        <h1>Your Shopping Cart</h1>
-        <form id="shopping-cart" action="input.html" method="post">
-          <div class="table-wrapper">
-            <table class="shopping-cart">
-              <thead>
-                <tr>
-                  <th scope="col">Item</th>
-                  <th scope="col">Qty</th>
-                  <th scope="col" colspan="2">Price</th>
-                </tr>
-              </thead>
-              <tbody></tbody>
-            </table>
-          </div>
-          <p id="sub-total">
-            <strong>Sub Total</strong>: <span id="stotal"></span>
-          </p>
-          <ul id="shopping-cart-actions">
-            <li>
-              <a href="input.html" class="btn">Update Cart</a>
-            </li>
-            <li>
-              <input
-                type="submit"
-                name="delete"
-                id="empty-cart"
-                class="btn"
-                value="Empty Cart"
-              />
-            </li>
-            <li>
-              <a href="checkout.html" class="btn">Go To Checkout</a>
-            </li>
-          </ul>
-        </form>
-      </div>
+</head>
+<body>
+    <div class="container">
+        <h1>Ringkasan Checkout</h1>
+        <div id="cart-items"></div>
+        <div class="total" id="total-price">Total Harga: Rp 0</div>
+       <div class="buttons">
+    <a href="jj.html">
+        <button id="payment-btn">Payment</button>
+    </a>
+</div>
+            <button id="reset-btn" class="remove-btn">Hapus Semua</button>
+        </div>
     </div>
 
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        let cart = JSON.parse(localStorage.getItem("cart")) || [];
-        const cartTableBody = document.querySelector(".shopping-cart tbody");
-        const subTotalElement = document.getElementById("stotal");
-        const emptyCartButton = document.getElementById("empty-cart");
+        // Ambil data keranjang dari localStorage
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const cartItemsContainer = document.getElementById('cart-items');
+        const totalPriceElement = document.getElementById('total-price');
 
-        function updateCartDisplay() {
-          cartTableBody.innerHTML = "";
-          let subTotal = 0;
+        // Fungsi untuk menampilkan item checkout
+        function renderCart() {
+            cartItemsContainer.innerHTML = "";
+            let total = 0;
 
-          if (cart.length === 0) {
-            cartTableBody.innerHTML =
-              '<tr><td colspan="4">Your cart is empty.</td></tr>';
-            subTotalElement.textContent = "Rp0.00";
-            return;
-          }
+            cart.forEach((item, index) => {
+                total += item.price;
 
-          cart.forEach((item) => {
-            const row = document.createElement("tr");
-            row.innerHTML = `
-              <td>${item.name}</td>
-              <td>${item.qty}</td>
-              <td>Rp${(item.price * item.qty).toFixed(2)}</td>
-            `;
-            cartTableBody.appendChild(row);
-            subTotal += item.price * item.qty;
-          });
+                const itemDiv = document.createElement('div');
+                itemDiv.classList.add('item');
+                itemDiv.innerHTML = `
+                    <span>${item.name} - Rp ${item.price.toLocaleString('id-ID')}</span>
+                    <button class="remove-btn" onclick="removeItem(${index})">Hapus</button>
+                `;
+                cartItemsContainer.appendChild(itemDiv);
+            });
 
-          subTotalElement.textContent = `Rp${subTotal.toFixed(2)}`;
+            totalPriceElement.textContent = `Total Harga: Rp ${total.toLocaleString('id-ID')}`;
         }
 
-        updateCartDisplay();
+        // Fungsi untuk menghapus satu item dari keranjang
+        function removeItem(index) {
+            cart.splice(index, 1);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            renderCart();
+        }
 
-        emptyCartButton.addEventListener("click", function (e) {
-          e.preventDefault();
-          localStorage.removeItem("cart");
-          cart = [];
-          updateCartDisplay();
+        // Fungsi untuk hapus semua item
+        document.getElementById('reset-btn').addEventListener('click', () => {
+            localStorage.removeItem('cart');
+            cart = [];
+            renderCart();
         });
-      });
+
+     
+
+        // Render item saat halaman dimuat
+        renderCart();
     </script>
-  </body>
+</body>
 </html>
